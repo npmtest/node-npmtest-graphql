@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-graphql/graphql/utilities/buildClientSchema.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-graphql">npmtest-graphql (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-graphql/graphql/utilities/buildClientSchema.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">31.86% <small>(36 / 113)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">7.69% <small>(3 / 39)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">3.03% <small>(1 / 33)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">31.25% <small>(35 / 112)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-graphql/graphql/utilities/</a> &#187; buildClientSchema.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.buildClientSchema = buildClientSchema;
+&nbsp;
+var _invariant = require('../jsutils/invariant');
+&nbsp;
+var _invariant2 = _interopRequireDefault(_invariant);
+&nbsp;
+var _keyMap = require('../jsutils/keyMap');
+&nbsp;
+var _keyMap2 = _interopRequireDefault(_keyMap);
+&nbsp;
+var _keyValMap = require('../jsutils/keyValMap');
+&nbsp;
+var _keyValMap2 = _interopRequireDefault(_keyValMap);
+&nbsp;
+var _valueFromAST = require('./valueFromAST');
+&nbsp;
+var _parser = require('../language/parser');
+&nbsp;
+var _schema = require('../type/schema');
+&nbsp;
+var _definition = require('../type/definition');
+&nbsp;
+var _introspection = require('../type/introspection');
+&nbsp;
+var _scalars = require('../type/scalars');
+&nbsp;
+var _directives = require('../type/directives');
+&nbsp;
+function _interopRequireDefault(obj) { return obj &amp;&amp; obj.__esModule ? obj : <span class="branch-1 cbranch-no" title="branch not covered" >{ 'default': obj };</span> }
+&nbsp;
+/**
+ * Build a GraphQLSchema for use by client tools.
+ *
+ * Given the result of a client running the introspection query, creates and
+ * returns a GraphQLSchema instance which can be then used with all graphql-js
+ * tools, but cannot be used to execute a query, as introspection does not
+ * represent the "resolver", "parse" or "serialize" functions or any other
+ * server-internal mechanisms.
+ */
+<span class="fstat-no" title="function not covered" >function buildClientSchema(introspection) {</span>
+&nbsp;
+  // Get the schema from the introspection result.
+<span class="cstat-no" title="statement not covered" >  var schemaIntrospection = introspection.__schema;</span>
+&nbsp;
+  // Converts the list of types into a keyMap based on the type names.
+<span class="cstat-no" title="statement not covered" >  var typeIntrospectionMap = (0, _keyMap2.default)(schemaIntrospection.types, <span class="fstat-no" title="function not covered" >function (type) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return type.name;</span>
+  });
+&nbsp;
+  // A cache to use to store the actual GraphQLType definition objects by name.
+  // Initialize to the GraphQL built in scalars. All functions below are inline
+  // so that this type def cache is within the scope of the closure.
+<span class="cstat-no" title="statement not covered" >  var typeDefCache = {</span>
+    String: _scalars.GraphQLString,
+    Int: _scalars.GraphQLInt,
+    Float: _scalars.GraphQLFloat,
+    Boolean: _scalars.GraphQLBoolean,
+    ID: _scalars.GraphQLID,
+    __Schema: _introspection.__Schema,
+    __Directive: _introspection.__Directive,
+    __DirectiveLocation: _introspection.__DirectiveLocation,
+    __Type: _introspection.__Type,
+    __Field: _introspection.__Field,
+    __InputValue: _introspection.__InputValue,
+    __EnumValue: _introspection.__EnumValue,
+    __TypeKind: _introspection.__TypeKind
+  };
+&nbsp;
+  // Given a type reference in introspection, return the GraphQLType instance.
+  // preferring cached instances before building new instances.
+<span class="fstat-no" title="function not covered" >  function getType(typeRef) {</span>
+<span class="cstat-no" title="statement not covered" >    if (typeRef.kind === _introspection.TypeKind.LIST) {</span>
+<span class="cstat-no" title="statement not covered" >      var itemRef = typeRef.ofType;</span>
+<span class="cstat-no" title="statement not covered" >      if (!itemRef) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('Decorated type deeper than introspection query.');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return new _definition.GraphQLList(getType(itemRef));</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (typeRef.kind === _introspection.TypeKind.NON_NULL) {</span>
+<span class="cstat-no" title="statement not covered" >      var nullableRef = typeRef.ofType;</span>
+<span class="cstat-no" title="statement not covered" >      if (!nullableRef) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('Decorated type deeper than introspection query.');</span>
+      }
+<span class="cstat-no" title="statement not covered" >      var nullableType = getType(nullableRef);</span>
+<span class="cstat-no" title="statement not covered" >      (0, _invariant2.default)(!(nullableType instanceof _definition.GraphQLNonNull), 'No nesting nonnull.');</span>
+<span class="cstat-no" title="statement not covered" >      return new _definition.GraphQLNonNull(nullableType);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return getNamedType(typeRef.name);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function getNamedType(typeName) {</span>
+<span class="cstat-no" title="statement not covered" >    if (typeDefCache[typeName]) {</span>
+<span class="cstat-no" title="statement not covered" >      return typeDefCache[typeName];</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var typeIntrospection = typeIntrospectionMap[typeName];</span>
+<span class="cstat-no" title="statement not covered" >    if (!typeIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new Error('Invalid or incomplete schema, unknown type: ' + typeName + '. Ensure ' + 'that a full introspection query is used in order to build a ' + 'client schema.');</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var typeDef = buildType(typeIntrospection);</span>
+<span class="cstat-no" title="statement not covered" >    typeDefCache[typeName] = typeDef;</span>
+<span class="cstat-no" title="statement not covered" >    return typeDef;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function getInputType(typeRef) {</span>
+<span class="cstat-no" title="statement not covered" >    var type = getType(typeRef);</span>
+<span class="cstat-no" title="statement not covered" >    (0, _invariant2.default)((0, _definition.isInputType)(type), 'Introspection must provide input type for arguments.');</span>
+<span class="cstat-no" title="statement not covered" >    return type;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function getOutputType(typeRef) {</span>
+<span class="cstat-no" title="statement not covered" >    var type = getType(typeRef);</span>
+<span class="cstat-no" title="statement not covered" >    (0, _invariant2.default)((0, _definition.isOutputType)(type), 'Introspection must provide output type for fields.');</span>
+<span class="cstat-no" title="statement not covered" >    return type;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function getObjectType(typeRef) {</span>
+<span class="cstat-no" title="statement not covered" >    var type = getType(typeRef);</span>
+<span class="cstat-no" title="statement not covered" >    (0, _invariant2.default)(type instanceof _definition.GraphQLObjectType, 'Introspection must provide object type for possibleTypes.');</span>
+<span class="cstat-no" title="statement not covered" >    return type;</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function getInterfaceType(typeRef) {</span>
+<span class="cstat-no" title="statement not covered" >    var type = getType(typeRef);</span>
+<span class="cstat-no" title="statement not covered" >    (0, _invariant2.default)(type instanceof _definition.GraphQLInterfaceType, 'Introspection must provide interface type for interfaces.');</span>
+<span class="cstat-no" title="statement not covered" >    return type;</span>
+  }
+&nbsp;
+  // Given a type's introspection result, construct the correct
+  // GraphQLType instance.
+<span class="fstat-no" title="function not covered" >  function buildType(type) {</span>
+<span class="cstat-no" title="statement not covered" >    switch (type.kind) {</span>
+      case _introspection.TypeKind.SCALAR:
+<span class="cstat-no" title="statement not covered" >        return buildScalarDef(type);</span>
+      case _introspection.TypeKind.OBJECT:
+<span class="cstat-no" title="statement not covered" >        return buildObjectDef(type);</span>
+      case _introspection.TypeKind.INTERFACE:
+<span class="cstat-no" title="statement not covered" >        return buildInterfaceDef(type);</span>
+      case _introspection.TypeKind.UNION:
+<span class="cstat-no" title="statement not covered" >        return buildUnionDef(type);</span>
+      case _introspection.TypeKind.ENUM:
+<span class="cstat-no" title="statement not covered" >        return buildEnumDef(type);</span>
+      case _introspection.TypeKind.INPUT_OBJECT:
+<span class="cstat-no" title="statement not covered" >        return buildInputObjectDef(type);</span>
+      default:
+<span class="cstat-no" title="statement not covered" >        throw new Error('Invalid or incomplete schema, unknown kind: ' + type.kind + '. Ensure ' + 'that a full introspection query is used in order to build a ' + 'client schema.');</span>
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildScalarDef(scalarIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    return new _definition.GraphQLScalarType({</span>
+      name: scalarIntrospection.name,
+      description: scalarIntrospection.description,
+      serialize: <span class="fstat-no" title="function not covered" >function serialize(id) {</span>
+<span class="cstat-no" title="statement not covered" >        return id;</span>
+      },
+      // Note: validation calls the parse functions to determine if a
+      // literal value is correct. Returning null would cause use of custom
+      // scalars to always fail validation. Returning false causes them to
+      // always pass validation.
+      parseValue: <span class="fstat-no" title="function not covered" >function parseValue() {</span>
+<span class="cstat-no" title="statement not covered" >        return false;</span>
+      },
+      parseLiteral: <span class="fstat-no" title="function not covered" >function parseLiteral() {</span>
+<span class="cstat-no" title="statement not covered" >        return false;</span>
+      }
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildObjectDef(objectIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    return new _definition.GraphQLObjectType({</span>
+      name: objectIntrospection.name,
+      description: objectIntrospection.description,
+      interfaces: objectIntrospection.interfaces.map(getInterfaceType),
+      fields: <span class="fstat-no" title="function not covered" >function fields() {</span>
+<span class="cstat-no" title="statement not covered" >        return buildFieldDefMap(objectIntrospection);</span>
+      }
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildInterfaceDef(interfaceIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    return new _definition.GraphQLInterfaceType({</span>
+      name: interfaceIntrospection.name,
+      description: interfaceIntrospection.description,
+      fields: <span class="fstat-no" title="function not covered" >function fields() {</span>
+<span class="cstat-no" title="statement not covered" >        return buildFieldDefMap(interfaceIntrospection);</span>
+      },
+      resolveType: cannotExecuteClientSchema
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildUnionDef(unionIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    return new _definition.GraphQLUnionType({</span>
+      name: unionIntrospection.name,
+      description: unionIntrospection.description,
+      types: unionIntrospection.possibleTypes.map(getObjectType),
+      resolveType: cannotExecuteClientSchema
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildEnumDef(enumIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    return new _definition.GraphQLEnumType({</span>
+      name: enumIntrospection.name,
+      description: enumIntrospection.description,
+      values: (0, _keyValMap2.default)(enumIntrospection.enumValues, <span class="fstat-no" title="function not covered" >function (valueIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >        return valueIntrospection.name;</span>
+      }, <span class="fstat-no" title="function not covered" >function (valueIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          description: valueIntrospection.description,
+          deprecationReason: valueIntrospection.deprecationReason
+        };
+      })
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildInputObjectDef(inputObjectIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    return new _definition.GraphQLInputObjectType({</span>
+      name: inputObjectIntrospection.name,
+      description: inputObjectIntrospection.description,
+      fields: <span class="fstat-no" title="function not covered" >function fields() {</span>
+<span class="cstat-no" title="statement not covered" >        return buildInputValueDefMap(inputObjectIntrospection.inputFields);</span>
+      }
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildFieldDefMap(typeIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    return (0, _keyValMap2.default)(typeIntrospection.fields, <span class="fstat-no" title="function not covered" >function (fieldIntrospection) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return fieldIntrospection.name;</span>
+    }, <span class="fstat-no" title="function not covered" >function (fieldIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        description: fieldIntrospection.description,
+        deprecationReason: fieldIntrospection.deprecationReason,
+        type: getOutputType(fieldIntrospection.type),
+        args: buildInputValueDefMap(fieldIntrospection.args)
+      };
+    });
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildInputValueDefMap(inputValueIntrospections) {</span>
+<span class="cstat-no" title="statement not covered" >    return (0, _keyValMap2.default)(inputValueIntrospections, <span class="fstat-no" title="function not covered" >function (inputValue) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return inputValue.name;</span>
+    }, buildInputValue);
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildInputValue(inputValueIntrospection) {</span>
+<span class="cstat-no" title="statement not covered" >    var type = getInputType(inputValueIntrospection.type);</span>
+<span class="cstat-no" title="statement not covered" >    var defaultValue = inputValueIntrospection.defaultValue ? (0, _valueFromAST.valueFromAST)((0, _parser.parseValue)(inputValueIntrospection.defaultValue), type) : undefined;</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      name: inputValueIntrospection.name,
+      description: inputValueIntrospection.description,
+      type: type,
+      defaultValue: defaultValue
+    };
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function buildDirective(directiveIntrospection) {</span>
+    // Support deprecated `on****` fields for building `locations`, as this
+    // is used by GraphiQL which may need to support outdated servers.
+<span class="cstat-no" title="statement not covered" >    var locations = directiveIntrospection.locations ? directiveIntrospection.locations.slice() : [].concat(!directiveIntrospection.onField ? [] : [_directives.DirectiveLocation.FIELD], !directiveIntrospection.onOperation ? [] : [_directives.DirectiveLocation.QUERY, _directives.DirectiveLocation.MUTATION, _directives.DirectiveLocation.SUBSCRIPTION], !directiveIntrospection.onFragment ? [] : [_directives.DirectiveLocation.FRAGMENT_DEFINITION, _directives.DirectiveLocation.FRAGMENT_SPREAD, _directives.DirectiveLocation.INLINE_FRAGMENT]);</span>
+<span class="cstat-no" title="statement not covered" >    return new _directives.GraphQLDirective({</span>
+      name: directiveIntrospection.name,
+      description: directiveIntrospection.description,
+      locations: locations,
+      args: buildInputValueDefMap(directiveIntrospection.args)
+    });
+  }
+&nbsp;
+  // Iterate through all types, getting the type definition for each, ensuring
+  // that any type not directly referenced by a field will get created.
+<span class="cstat-no" title="statement not covered" >  var types = schemaIntrospection.types.map(<span class="fstat-no" title="function not covered" >function (typeIntrospection) {</span></span>
+<span class="cstat-no" title="statement not covered" >    return getNamedType(typeIntrospection.name);</span>
+  });
+&nbsp;
+  // Get the root Query, Mutation, and Subscription types.
+<span class="cstat-no" title="statement not covered" >  var queryType = getObjectType(schemaIntrospection.queryType);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var mutationType = schemaIntrospection.mutationType ? getObjectType(schemaIntrospection.mutationType) : null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var subscriptionType = schemaIntrospection.subscriptionType ? getObjectType(schemaIntrospection.subscriptionType) : null;</span>
+&nbsp;
+  // Get the directives supported by Introspection, assuming empty-set if
+  // directives were not queried for.
+<span class="cstat-no" title="statement not covered" >  var directives = schemaIntrospection.directives ? schemaIntrospection.directives.map(buildDirective) : [];</span>
+&nbsp;
+  // Then produce and return a Schema with these types.
+<span class="cstat-no" title="statement not covered" >  return new _schema.GraphQLSchema({</span>
+    query: queryType,
+    mutation: mutationType,
+    subscription: subscriptionType,
+    types: types,
+    directives: directives
+  });
+}
+/**
+ *  Copyright (c) 2015, Facebook, Inc.
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree. An additional grant
+ *  of patent rights can be found in the PATENTS file in the same directory.
+ */
+&nbsp;
+<span class="fstat-no" title="function not covered" >function cannotExecuteClientSchema() {</span>
+<span class="cstat-no" title="statement not covered" >  throw new Error('Client Schema cannot use Interface or Union types for execution.');</span>
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 11:37:10 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
