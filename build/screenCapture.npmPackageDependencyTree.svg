@@ -4,7 +4,7 @@
 <tspan x="10" y="26">2 megabytes installed</tspan>
 <tspan x="10" y="42"></tspan>
 <tspan x="10" y="58">node_modules</tspan>
-<tspan x="10" y="74">└─┬ graphql@0.9.2 </tspan>
+<tspan x="10" y="74">└─┬ graphql@0.9.3 </tspan>
 <tspan x="10" y="90">  └── iterall@1.0.3</tspan>
 </text>
 </svg>
