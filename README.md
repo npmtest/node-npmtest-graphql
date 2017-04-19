@@ -1,4 +1,7 @@
-# test coverage for  [graphql (v0.9.3)](https://github.com/graphql/graphql-js)  [![npm package](https://img.shields.io/npm/v/npmtest-graphql.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-graphql) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-graphql.svg)](https://travis-ci.org/npmtest/node-npmtest-graphql)
+# npmtest-graphql
+
+#### test coverage for  [graphql (v0.9.3)](https://github.com/graphql/graphql-js)  [![npm package](https://img.shields.io/npm/v/npmtest-graphql.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-graphql) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-graphql.svg)](https://travis-ci.org/npmtest/node-npmtest-graphql)
+
 #### A Query Language and Runtime which can target any service.
 
 [![NPM](https://nodei.co/npm/graphql.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/graphql)
