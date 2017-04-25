@@ -1,6 +1,6 @@
 # npmtest-graphql
 
-#### test coverage for  [graphql (v0.9.3)](https://github.com/graphql/graphql-js)  [![npm package](https://img.shields.io/npm/v/npmtest-graphql.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-graphql) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-graphql.svg)](https://travis-ci.org/npmtest/node-npmtest-graphql)
+#### basic test coverage for  [graphql (v0.9.3)](https://github.com/graphql/graphql-js)  [![npm package](https://img.shields.io/npm/v/npmtest-graphql.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-graphql) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-graphql.svg)](https://travis-ci.org/npmtest/node-npmtest-graphql)
 
 #### A Query Language and Runtime which can target any service.
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-graphql/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-graphql/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-graphql/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-graphql/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-graphql/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-graphql/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-graphql/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-graphql/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-graphql/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-graphql/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-graphql/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-graphql/build/coverage.html/index.html)
 
@@ -138,7 +138,8 @@
         "testonly": "babel-node ./node_modules/.bin/_mocha $npm_package_options_mocha",
         "watch": "babel-node ./resources/watch.js"
     },
-    "version": "0.9.3"
+    "version": "0.9.3",
+    "bin": {}
 }
 ```
 
